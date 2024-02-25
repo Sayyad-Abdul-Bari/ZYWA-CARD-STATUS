@@ -68,6 +68,9 @@ Certainly! Below is the textual representation of the flow after running `main.p
 
 ## Running the Application Flow
 
+1. **Create Database :**
+   - Create database with same name as you want to provide in `config.py` 
+   - Query for creating database - CREATE DATABASE <DB_NAME>;
 1. **Run `main.py`:**
    - Execution starts at the `main.py` file.
 
