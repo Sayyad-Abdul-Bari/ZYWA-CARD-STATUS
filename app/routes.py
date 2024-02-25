@@ -1,6 +1,8 @@
 from flask import request, jsonify, render_template
 from app import app, db
 from app.models import CardStatus
+from sqlalchemy import func
+
 
 @app.route("/")
 def index():
@@ -20,13 +22,13 @@ def get_card_status():
     if identifier_type == "user_phone":
         card_status = (
             CardStatus.query.filter_by(user_phone=identifier)
-            .order_by(CardStatus.timestamp.desc())
+            .order_by(CardStatus.date.desc())
             .first()
         )
     else:
         card_status = (
             CardStatus.query.filter_by(card_id=identifier)
-            .order_by(CardStatus.timestamp.desc())
+            .order_by(CardStatus.date.desc())
             .first()
         )
 

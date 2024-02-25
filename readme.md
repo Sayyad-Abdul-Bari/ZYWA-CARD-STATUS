@@ -55,7 +55,7 @@ project 1.0/
 
 To set up the project, follow these steps:
 
-1. Clone the repository: `git clone <repository_url>`
+1. Clone the repository: `git clone https://github.com/Sayyad-Abdul-Bari/ZYWA-CARD-STATUS.git
 2. Install dependencies: `pip install -r requirements.txt`
 3. Update configuration: Open `config.py` and modify the database configuration variables according to your setup.
 

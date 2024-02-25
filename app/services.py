@@ -1,7 +1,7 @@
 from app import app, db
 import os
 import pandas as pd
-from app.models import CardStatus, db
+from app.models import CardStatus
 from sqlalchemy import text
 
 def create_all_tables():
@@ -39,6 +39,7 @@ def populate_tables(data_folder="data"):
                         # Convert timestamp string to datetime object
                         timestamp = pd.to_datetime(row.get("Timestamp"), errors='coerce')
 
+
                         card_status = CardStatus(
                             card_id=row.get('Card ID', ''),
                             user_phone=user_phone,
@@ -49,6 +50,7 @@ def populate_tables(data_folder="data"):
                     
                     # Commit changes to the database after processing each file
                     db.session.commit()
+
 
                 table_count += 1
         except Exception as e:

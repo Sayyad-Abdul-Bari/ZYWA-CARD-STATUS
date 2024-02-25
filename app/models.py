@@ -9,6 +9,8 @@ class CardStatus(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     comment = db.Column(db.String(255))
 
+  
+
     def as_dict(self):
         return {
             "card_id": self.card_id,
