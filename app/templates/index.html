@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZYWA Card </title>
+</head>
+
+<body>
+    <h1>ZYWA Card </h1>
+
+    <form id="cardStatusForm" action="/get_card_status" method="get">
+        <label for="identifier_type">Select Search Type:</label>
+        <select name="identifier_type" id="identifier_type" required>
+            <option value="user_phone">User Contact</option>
+            <option value="card_id">Card ID</option>
+        </select>
+
+        <br>
+
+        <label for="identifier">Enter Search Input:</label>
+        <input type="text" name="identifier" id="identifier" required>
+
+        <br>
+
+        <button type="button" onclick="getCardStatus()">SUBMIT</button>
+    </form>
+
+    <h2>Status </h2>
+    <div id="cardStatusResult">
+        <p>Timestamp: <span id="timestamp"></span></p>
+        <p>Comment: <span id="comment"></span></p>
+        <p id="errorMessage" style="color: red;"></p>
+    </div>
+
+    <script>
+        function getCardStatus() {
+            var form = document.getElementById('cardStatusForm');
+            var formData = new FormData(form);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/get_card_status?' + new URLSearchParams(formData).toString(), true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        var result = JSON.parse(xhr.responseText);
+        
+                        // Update result dynamically
+                        document.getElementById('errorMessage').innerText = ""; // Clear any previous error message
+                        document.getElementById('timestamp').innerText = result.timestamp;
+                        document.getElementById('comment').innerText = result.comment;
+                    } else {
+                        document.getElementById('timestamp').innerText = ""; // Clear timestamp
+                        document.getElementById('comment').innerText = ""; // Clear comment
+                        document.getElementById('errorMessage').innerText = "Error fetching card status.";
+                    }
+                }
+            };
+
+            xhr.send();
+        }
+    </script>
+</body>
+
+</html>
